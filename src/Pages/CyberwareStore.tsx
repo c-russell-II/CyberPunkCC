@@ -24,6 +24,18 @@ export default function CyberwareStore(props: {next: () => void}) {
 		setCap(chara.cyberwareCapacity);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const handlePurchase = (cyberware: Cyberware) => {
+		if (money < cyberware.price || cyberware.capCost > cap) {
+			alert("You don't have enough money or Cyberware capacity!");
+			return;
+		} else {
+			setMoney((prev) => prev - cyberware.price);
+			setCap((prev) => prev - cyberware.capCost);
+			chara.installCyberware(cyberware);
+			alert("Cyberware Purchased!");
+		}
+	};
 	return (
 		<section>
 			<h2>Purchase Miscellaneous Cyberware</h2>
@@ -66,12 +78,18 @@ export default function CyberwareStore(props: {next: () => void}) {
 														/>
 													);
 												})}
-											{current.hasRequirements &&
-												requirementCheck(
-													current,
-													{ neuro, phys, reflex },
-													chara.installedCyberware
-												) && <button onClick={() => {}} />}
+											{!current.hasRequirements ||
+											requirementCheck(
+												current,
+												{ neuro, phys, reflex },
+												chara.installedCyberware
+											) ? (
+												<button onClick={() => handlePurchase(current)}>
+													Purchase {current.name}
+												</button>
+											) : (
+												<p>You don't meet the requirements.</p>
+											)}
 										</Accordian>
 									</div>
 								);

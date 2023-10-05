@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Accordian from "../Components/Accordian";
 import CompletableTextArea from "../Components/CompletableTextArea";
+import { useCharaStore } from "../Utils/CharaStore";
 
-export default function CharaDefiner(props: {next: () => void}) {
+export default function CharaDefiner(props: { next: () => void }) {
 	const [name, setName] = useState("");
+	const charaStore = useCharaStore();
 	const initBackground: { [key: string]: string } = {
 		arrival: "",
 		secrets: "",
@@ -23,13 +25,18 @@ export default function CharaDefiner(props: {next: () => void}) {
 		name: false,
 	});
 
+	const handleFinish = () => {
+		charaStore.setName(name);
+		charaStore.setBackground(currBackground);
+		props.next();
+	};
 
 	return (
 		<section>
 			{/* TODO: CSS for the labels: gotta be display block, not inline, just because of the way it renders :( */}
 			{!completedBackground.name && (
 				<>
-                    <h2>What's your Name?</h2>
+					<h2>What's your Name?</h2>
 					<input
 						type="text"
 						placeholder="Character Name"
@@ -98,8 +105,25 @@ export default function CharaDefiner(props: {next: () => void}) {
 				)}
 			</Accordian>
 			{Object.values(completedBackground).every((e) => e) ? (
-				<button onClick={() => props.next()}>Finalize Background</button>
-			) : Object.values(completedBackground).some(e => e) ? <button onClick={() => {props.next();}}> Finish Background</button> : <button onClick={() => {props.next();}}>Skip Background</button>}
+				<button onClick={() => handleFinish()}>Finalize Background</button>
+			) : Object.values(completedBackground).some((e) => e) ? (
+				<button
+					onClick={() => {
+						handleFinish();
+					}}
+				>
+					{" "}
+					Finish Background
+				</button>
+			) : (
+				<button
+					onClick={() => {
+						handleFinish();
+					}}
+				>
+					Skip Background
+				</button>
+			)}
 		</section>
 	);
 }

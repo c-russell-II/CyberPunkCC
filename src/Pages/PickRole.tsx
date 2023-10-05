@@ -16,6 +16,7 @@ export default function PickRole(props: {next: () => void}) {
 		event.preventDefault();
 		event.stopPropagation();
 		setCurrentRole(event.currentTarget.value);
+		alert(`Selected ${event.currentTarget.value}, confirm to continue!`);
 	};
 	const handleConfirm = (event: React.SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
