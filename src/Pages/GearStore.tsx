@@ -16,6 +16,9 @@ export default function GearStore(props: {next: () => void}) {
 		return true;
 	};
 	const handlePurchase = (firearm: string, type: string) => {
+		console.log(`Firearm ${firearm} type ${type}`);
+		console.table(firearms[type]);
+		console.table(firearms[type][firearm]);
 		const price = firearms[type][firearm].price;
 		if (money < price) {
 			alert("Not enough money!");
@@ -64,7 +67,12 @@ export default function GearStore(props: {next: () => void}) {
 											})}
 										{!firearm.hasRequirements ||
 										checkStatRequirements(firearm.requirements) ? (
-											<button onClick={() => handlePurchase(firearm.name, key)}>
+											<button
+												onClick={(event) => {
+													event.stopPropagation();
+													handlePurchase(firearm.id, key);
+												}}
+											>
 												Purchase
 											</button>
 										) : (

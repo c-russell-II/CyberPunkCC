@@ -66,7 +66,9 @@ export const useCharaStore = create<CharaStore>()((set) => ({
 		}),
 	gear: {},
 	addGear: (name: string, type: AnyFirearm) =>
-		set((state: CharaStore) => ({ gear: { ...state.gear, [name]: type } })),
+		set((state: CharaStore) => {
+			return { ...state, gear: { ...state.gear, [name]: type } };
+		}),
 }));
 const generateNewCyberwareID = (
 	current: { [key: string]: Cyberware },
