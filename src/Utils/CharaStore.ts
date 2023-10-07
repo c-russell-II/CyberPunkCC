@@ -25,7 +25,7 @@ export const useCharaStore = create<CharaStore>()((set) => ({
 	name: "",
 	setName: (name: string) => set({ name }),
 	background: {},
-	setBackground: (background: {[key: string]: string}) => set({ background }),
+	setBackground: (background: { [key: string]: string }) => set({ background }),
 	roleQuestions: [],
 	setRoleQuestions: () => set({}),
 	cyberwareCapacity: 100,
@@ -56,11 +56,16 @@ export const useCharaStore = create<CharaStore>()((set) => ({
 		}),
 	money: 2000,
 	increaseMoney: (amount: number) =>
-		set((state: CharaStore) => ({ money: state.money + amount })),
+		set((state: CharaStore) => {
+			return { money: state.money + amount };
+		}),
 	decreaseMoney: (amount: number) =>
-		set((state: CharaStore) => ({ money: state.money - amount })),
+		set((state: CharaStore) => {
+			return { money: state.money - amount };
+		}),
 	gear: {},
-	addGear: (name: string, type: AnyFirearm) => set((state: CharaStore) => ({ gear: {...state.gear, [name]: type}}))
+	addGear: (name: string, type: AnyFirearm) =>
+		set((state: CharaStore) => ({ gear: { ...state.gear, [name]: type } })),
 }));
 const generateNewCyberwareID = (
 	current: { [key: string]: Cyberware },

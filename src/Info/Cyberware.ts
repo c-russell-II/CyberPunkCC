@@ -88,25 +88,22 @@ export function requirementCheck(
 	installedCyberware: { [key: string]: Cyberware }
 ) {
 	if (cyberware.hasRequirements) {
-		//TODO: handle comprehensive requirement checking!
-		const reqs = cyberware.requirements;
-		const statReqs = reqs.filter((req) => req.type === "stat");
-		const wareReqs = reqs.filter((req) => req.type === "cyberware");
-		const slotReqs = reqs.filter((req) => req.type === "slot");
-		const OSReqs = reqs.filter((req) => req.type === "OS");
-		const statReqCheck = statReqs.every((req) =>
-			checkStatReqs(req as StatReq, stats)
-		);
-		const wareReqCheck = wareReqs.every((req) =>
-			checkWareReqs(req as CyberwareReq, installedCyberware)
-		);
-		const slotReqCheck = slotReqs.every((req) =>
-			checkSlotReqs(req as SlotReq, installedCyberware)
-		);
-		const OSReqCheck = OSReqs.every((req) =>
-			checkOSReqs(req as OSReq, installedCyberware)
-		);
-		return statReqCheck && wareReqCheck && slotReqCheck && OSReqCheck;
+		for (const req of cyberware.requirements) {
+			switch (req.type) {
+				case "stat":
+					if (!checkStatReqs(req, stats)) return false;
+					break;
+				case "cyberware":
+					if (!checkWareReqs(req, installedCyberware)) return false;
+					break;
+				case "OS":
+					if (!checkOSReqs(req, installedCyberware)) return false;
+					break;
+				case "slot":
+					if (!checkSlotReqs(req, installedCyberware)) return false;
+					break;
+			}
+		}
 	}
 	return true;
 }
@@ -123,9 +120,12 @@ const checkSlotReqs = (
 	req: SlotReq,
 	installedCyberware: { [key: string]: Cyberware }
 ) => {
-	return Object.values(installedCyberware).some(
-		(ware) => ware.slot === req.slot && ware.tier >= req.tier
-	);
+	return Object.values(installedCyberware).some((ware) => {
+		if ("baseSlot" in ware) {
+			return req.slot === ware.baseSlot && ware.tier >= req.tier;
+		}
+		return false;
+	});
 };
 
 const checkOSReqs = (

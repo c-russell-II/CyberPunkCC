@@ -14,12 +14,10 @@ export default function PickOS(props: { next: () => void }) {
 		requirementCheck(OSOptions[option], stats, installedCyberware)
 	);
 
-	//TODO: Handle the actual purchase price of cyberware in the PickOS component
 	const handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		setChoice(event.currentTarget.value);
 	};
-	//TODO: Handle the cyberware capacity check in the PickOS component
 	const handleSubmit = (event: React.SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		decreaseMoney(OSOptions[choice].price);
@@ -47,7 +45,7 @@ export default function PickOS(props: { next: () => void }) {
 					</button>
 				</Accordian>
 			))}
-			{choice && <button onClick={handleSubmit}>Confirm</button>}
+			{choice && <><p>Install {choice}?</p><br/><button onClick={handleSubmit}>Confirm</button> </>}
 		</section>
 	);
 }

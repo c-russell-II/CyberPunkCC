@@ -22,43 +22,54 @@ export default function CharaSheet() {
 			<h2>
 				{name}, {role}
 			</h2>
-            <h3>Role</h3>
-            <div className="smallDivider"/>
-            <p>{role}</p>
-            <h3>Stats</h3>
-            <div className="smallDivider"/>
-            <p>Physique: {phys}</p>
-            <p>NeuroAbility: {neuro}</p>
-            <p>Reflexes: {reflex}</p>
-            <p>{role} Ability: {path}</p>
-            <p>Connections: {connections}</p>
-            <p>Rep: {rep}</p>
+			<h3>Role</h3>
+			<div className="smallDivider" />
+			<p>{role}</p>
+			<h3>Stats</h3>
+			<div className="smallDivider" />
+			<p>Physique: {phys}</p>
+			<p>NeuroAbility: {neuro}</p>
+			<p>Reflexes: {reflex}</p>
+			<p>
+				{role} Ability: {path}
+			</p>
+			<p>Connections: {connections}</p>
+			<p>Rep: {rep}</p>
 
-			{hasBackground() && (
-				<div>
-					<h3>Background</h3>
-					{background.arrival !== "" && (
-						<p>How you got here: {background.arrival}</p>
-					)}
-					{background.secrets !== "" && (
-						<p>Secrets you keep: {background.secrets}</p>
-					)}
-					{background.goals !== "" && <p>Goals you have: {background.goals}</p>}
-					{background.lines !== "" && (
-						<p>Lines you won't cross: {background.lines}</p>
-					)}
-					{roleQuestions.map((e: [string, string]) => {
-						if (e[1] !== "") {
-							return (
-								<p>
-									{e[0]}: {e[1]}
-								</p>
-							);
-						}
-						return <></>;
-					})}
-				</div>
-			)}
+			<div>
+				<h3>Background</h3>
+				{hasBackground() && (
+					<>
+						{background.arrival !== "" && (
+							<p>How you got here: {background.arrival}</p>
+						)}
+						{background.secrets !== "" && (
+							<p>Secrets you keep: {background.secrets}</p>
+						)}
+						{background.goals !== "" && (
+							<p>Goals you have: {background.goals}</p>
+						)}
+						{background.lines !== "" && (
+							<p>Lines you won't cross: {background.lines}</p>
+						)}
+						{roleQuestions.map((e: [string, string]) => {
+							if (e[1] !== "") {
+								return (
+									<p>
+										{e[0]}: {e[1]}
+									</p>
+								);
+							}
+							return <></>;
+						})}
+					</>
+				)}
+				{background.arrival !== '' && <><p>How did you come to the Western Corporate States?</p><p>{background.arrival}</p></>}
+				{background.secrets !== '' && <><p>Do you have any major secrets to share here?</p><p>{background.secrets}</p></> }
+				{background.goals !== '' && <><p>What major goals do you wish to share?</p><p>{background.goals}</p></>}
+				{background.lines !== '' && <><p>What lines will you never cross?</p><p>{background.lines}</p></>}
+			</div>
+
 			<div>
 				<h3>Inventory</h3>
 				<p>Eddies: {money}</p>

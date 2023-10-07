@@ -1,5 +1,3 @@
-//TODO: Role info, descriptions, bonuses and abilities... 
-
 import { exampleCorpoAbilities, exampleCorpoCharacters } from "./Roles/Corpo";
 import { exampleFixerAbilities, exampleFixers } from "./Roles/Fixer";
 import { exampleMediaAbilities, exampleMediaCharacters } from "./Roles/Media";

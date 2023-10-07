@@ -33,7 +33,6 @@ export default function CharaDefiner(props: { next: () => void }) {
 
 	return (
 		<section>
-			{/* TODO: CSS for the labels: gotta be display block, not inline, just because of the way it renders :( */}
 			{!completedBackground.name && (
 				<>
 					<h2>What's your Name?</h2>
@@ -101,6 +100,7 @@ export default function CharaDefiner(props: { next: () => void }) {
 							setCurrBackground({ ...currBackground, lines: arg0 });
 							setCompletedBackground({ ...completedBackground, lines: true });
 						}}
+						stopProp={true}
 					/>
 				)}
 			</Accordian>

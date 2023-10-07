@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { CharaStore, useCharaStore } from "../Utils/CharaStore";
 import useStatStore, { StatStore } from "../Utils/StatStore";
 import {
@@ -11,27 +10,17 @@ import Accordian from "../Components/Accordian";
 import SingleRequirementRender from "../Components/SingleRequirementRender";
 
 export default function CyberwareStore(props: {next: () => void}) {
-	const [money, setMoney] = useState(0);
-	const [cap, setCap] = useState(0);
 	const chara = useCharaStore((state: CharaStore) => state);
 	const { neuro, phys, reflex } = useStatStore(
 		(state: StatStore) => state.stats
 	);
 
-	useEffect(() => {
-		//Set initial values
-		setMoney(chara.money);
-		setCap(chara.cyberwareCapacity);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const handlePurchase = (cyberware: Cyberware) => {
-		if (money < cyberware.price || cyberware.capCost > cap) {
+		if (chara.money < cyberware.price || cyberware.capCost > chara.cyberwareCapacity) {
 			alert("You don't have enough money or Cyberware capacity!");
 			return;
 		} else {
-			setMoney((prev) => prev - cyberware.price);
-			setCap((prev) => prev - cyberware.capCost);
+			chara.decreaseMoney(cyberware.price);
 			chara.installCyberware(cyberware);
 			alert("Cyberware Purchased!");
 		}
@@ -44,7 +33,7 @@ export default function CyberwareStore(props: {next: () => void}) {
 			</p>
 			<div className="divider" />
 			<p>
-				Cash Available: {money} Cyberware Capacity: {cap}
+				Cash Available: {chara.money} Cyberware Capacity: {chara.cyberwareCapacity}
 			</p>
 			<div className="divider" />
 			{Object.keys(cyberwareBySlot).map((key: string, i: number) => {
@@ -68,7 +57,6 @@ export default function CyberwareStore(props: {next: () => void}) {
 											<p>price: €${current.price}</p>
 											<p>tier: {current.tier}</p>
 											<p>Capacity Used: {current.capCost}</p>
-											{/* TODO: Handle checking & rendering requirements in cyberware store! */}
 											{current.hasRequirements &&
 												current.requirements.map((e: AnyReq, i: number) => {
 													return (
@@ -82,7 +70,7 @@ export default function CyberwareStore(props: {next: () => void}) {
 											requirementCheck(
 												current,
 												{ neuro, phys, reflex },
-												chara.installedCyberware
+												{...chara.installedCyberware, }
 											) ? (
 												<button onClick={() => handlePurchase(current)}>
 													Purchase {current.name}

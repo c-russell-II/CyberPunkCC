@@ -77,7 +77,6 @@ export default function SecondaryStats(props: { next: () => void }) {
 		props.next();
 	}
 
-	//TODO: Handle submit for secondary stats!
 	return (
 		<section>
 			<h2>Soft Stats</h2>

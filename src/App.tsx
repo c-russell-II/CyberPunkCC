@@ -15,8 +15,6 @@ function App() {
 	const [step, setStep] = useState("start");
 	const [body, setBody] = useState(<></>);
 	const role = useRoleStore((state) => state.role);
-	//TODO: Decide on conditional rendering method! Switch statement, probably?
-	//TODO: Handle starting money and so on.
 
 	useEffect(() => {
 		switch (step) {
@@ -46,7 +44,6 @@ function App() {
 				break;
 			default:
 				setBody(<CharaSheet />);
-			//TODO: final print page!
 		}
 	}, [step]);
 

@@ -11,7 +11,6 @@ import { useRoleStore } from "../Utils/RoleStore";
 export default function PickRole(props: {next: () => void}) {
 	const [currentRole, setCurrentRole] = useState("");
 	const setRole = useRoleStore((state) => state.setRole);
-	//TODO: Handle selection of roles, and classes/CSS for role info &c
 	const handleSelect = (event: React.SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		event.stopPropagation();
