@@ -15,7 +15,7 @@ function App() {
 	const [step, setStep] = useState("start");
 	const [body, setBody] = useState(<></>);
 	const role = useRoleStore((state) => state.role);
-
+	//TODO: Replace Alert with a Custom Modal! alert is actually *really* irritating and serves functionally zero purpose!
 	useEffect(() => {
 		switch (step) {
 			case "start":

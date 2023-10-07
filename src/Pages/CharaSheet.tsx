@@ -11,12 +11,6 @@ export default function CharaSheet() {
 	const { stats } = useStatStore();
 	const { path, connections, rep, phys, neuro, reflex } = stats;
 
-	const hasBackground = () => {
-		return (
-			roleQuestions.some((e: [string, string]) => e[1] !== "") ||
-			Object.values(background).some((e: string) => e !== "")
-		);
-	};
 	return (
 		<div>
 			<h2>
@@ -38,32 +32,16 @@ export default function CharaSheet() {
 
 			<div>
 				<h3>Background</h3>
-				{hasBackground() && (
-					<>
-						{background.arrival !== "" && (
-							<p>How you got here: {background.arrival}</p>
-						)}
-						{background.secrets !== "" && (
-							<p>Secrets you keep: {background.secrets}</p>
-						)}
-						{background.goals !== "" && (
-							<p>Goals you have: {background.goals}</p>
-						)}
-						{background.lines !== "" && (
-							<p>Lines you won't cross: {background.lines}</p>
-						)}
-						{roleQuestions.map((e: [string, string]) => {
-							if (e[1] !== "") {
-								return (
-									<p>
-										{e[0]}: {e[1]}
-									</p>
-								);
-							}
-							return <></>;
-						})}
-					</>
-				)}
+				{roleQuestions.map((e: [string, string]) => {
+					if (e[1] !== "") {
+						return (
+							<p>
+								{e[0]}: {e[1]}
+							</p>
+						);
+					}
+					return <></>;
+				})}
 				{background.arrival !== '' && <><p>How did you come to the Western Corporate States?</p><p>{background.arrival}</p></>}
 				{background.secrets !== '' && <><p>Do you have any major secrets to share here?</p><p>{background.secrets}</p></> }
 				{background.goals !== '' && <><p>What major goals do you wish to share?</p><p>{background.goals}</p></>}

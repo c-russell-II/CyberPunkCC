@@ -37,6 +37,7 @@ export const useCharaStore = create<CharaStore>()((set) => ({
 				cyberware
 			);
 			return {
+				...state,
 				installedCyberware: {
 					...state.installedCyberware,
 					[newWare.id]: newWare,
@@ -71,7 +72,7 @@ const generateNewCyberwareID = (
 	current: { [key: string]: Cyberware },
 	newWare: Cyberware
 ) => {
-	let id = newWare.name;
+	let id = newWare.id;
 	if (id in current) {
 		let i = 1;
 		while (id + i in current) {
