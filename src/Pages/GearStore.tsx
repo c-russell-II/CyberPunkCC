@@ -1,13 +1,17 @@
+import { useState } from "react";
 import Accordian from "../Components/Accordian";
 import SingleRequirementRender from "../Components/SingleRequirementRender";
 import { AnyReq, StatReq } from "../Info/Cyberware";
 import { AnyFirearm, firearms } from "../Info/Gear";
 import { useCharaStore } from "../Utils/CharaStore";
 import useStatStore from "../Utils/StatStore";
+import CustomModal from "../Components/CustomModal";
 
-export default function GearStore(props: {next: () => void}) {
-	const {money, decreaseMoney, addGear} = useCharaStore();
-	const {stats} = useStatStore();
+export default function GearStore(props: { next: () => void }) {
+	const { money, decreaseMoney, addGear } = useCharaStore();
+	const { stats } = useStatStore();
+	const [useModal, setUseModal] = useState(false);
+	const [modalContents, setModalContents] = useState(<></>);
 	console.log(stats);
 	const checkStatRequirements = (reqs: StatReq[]) => {
 		for (const req of reqs) {
@@ -16,12 +20,10 @@ export default function GearStore(props: {next: () => void}) {
 		return true;
 	};
 	const handlePurchase = (firearm: string, type: string) => {
-		console.log(`Firearm ${firearm} type ${type}`);
-		console.table(firearms[type]);
-		console.table(firearms[type][firearm]);
 		const price = firearms[type][firearm].price;
 		if (money < price) {
-			alert("Not enough money!");
+			setModalContents(<b>You can't afford that, choom!</b>);
+			setUseModal(true);
 		} else {
 			decreaseMoney(price);
 			addGear(firearm, firearms[type][firearm]);
@@ -30,6 +32,12 @@ export default function GearStore(props: {next: () => void}) {
 	return (
 		<section>
 			<h2>Select Gear to Purchase</h2>
+			<CustomModal
+				active={useModal}
+				control={setUseModal}
+			>
+				{modalContents}
+			</CustomModal>
 			<p>
 				This list is, for now, just firearms. If you wish to purchase other
 				weapons or miscellaneous gear - or just fashion, vehicles, etc. save
@@ -70,7 +78,7 @@ export default function GearStore(props: {next: () => void}) {
 											<button
 												onClick={(event) => {
 													event.stopPropagation();
-													handlePurchase(firearm.id, key);
+													handlePurchase(firearm.id, firearm.firearmType);
 												}}
 											>
 												Purchase

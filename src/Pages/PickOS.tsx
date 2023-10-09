@@ -28,9 +28,13 @@ export default function PickOS(props: { next: () => void }) {
 	return (
 		<section>
 			<h2>Select Your Runner's Operating System</h2>
-			{/* TODO: better description for Pick OS */}
-			{/* TODO: display currently chosen OS! */}
-			<p>pick your most important cyberware</p>
+			<p>
+				Most Cyberware handles simple things - tougher skin, faster nerve
+				response, and the like, these bits of chrome are a different sort
+				entirely. 'OS'-ware, as we'll call it, fundamentally defines how you
+				fight - through the net, through strength and firepower, or through
+				speed and positioning.
+			</p>
 			{availableOptions.map((option) => (
 				<Accordian
 					title={option}
@@ -45,7 +49,13 @@ export default function PickOS(props: { next: () => void }) {
 					</button>
 				</Accordian>
 			))}
-			{choice && <><p>Install {choice}?</p><br/><button onClick={handleSubmit}>Confirm</button> </>}
+			{choice && (
+				<>
+					<p>Install {choice}?</p>
+					<br />
+					<button onClick={handleSubmit}>Confirm</button>{" "}
+				</>
+			)}
 		</section>
 	);
 }

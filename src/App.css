@@ -72,5 +72,41 @@ textarea {
 	width: 90%;
 	height: fit-content;
 }
+button :hover {
+	cursor: pointer;
+}
 
+.modal-Outer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	box-sizing: border-box;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modal-inner {
+	width: 50%;
+	height: 50%;
+	background-color: #fff;
+	border-radius: 0.5em;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.x-button {
+	position: relative;
+	bottom: 45%;
+	left: 45%;
+	width: 1em;
+	height: 1em;
+	border: 0;
+	background-color: transparent;
+}
 /* TODO: Responsive layout for desktop use. TODO: Actual proper styles instead of basic layout & gray/black coloring */

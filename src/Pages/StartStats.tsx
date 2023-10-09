@@ -2,27 +2,33 @@ import { useState } from "react";
 import SingleStat from "../Components/NumberChooser";
 import useStatStore from "../Utils/StatStore";
 import { useCharaStore } from "../Utils/CharaStore";
+import CustomModal from "../Components/CustomModal";
 
 export default function StartStats(props: { next: () => void }) {
 	const { stats, increase, decrease } = useStatStore();
-	const {increaseMoney} = useCharaStore();
+	const { increaseMoney } = useCharaStore();
 	const [points, setPoints] = useState(21);
+	const [useModal, setUseModal] = useState(false);
+	const [modalContents, setModalContents] = useState(<></>);
 
 	const checkStatChange = (val: number, dir: boolean) => {
 		if (dir) {
 			if (val > points) {
-				alert("Not enough points!");
+				setModalContents(<b>Not Enough Points Remaining!</b>)
+				setUseModal(true);
 				return false;
 			}
 			if (val > 4) {
-				alert("Maximum value (should be) 5!");
+				setModalContents(<b>Max Value is 5!</b>);
+				setUseModal(true);
 				return false;
 			}
 			setPoints((prev) => prev - (val + 1));
 			return true;
 		} else {
 			if (val < 2) {
-				alert("Minimum value (should be) 1!");
+				setModalContents(<b>Minimum Value is 1!</b>);
+				setUseModal(true);
 				return false;
 			}
 			setPoints((prev) => prev + val);
@@ -33,15 +39,23 @@ export default function StartStats(props: { next: () => void }) {
 	const handleSubmit = (event: React.SyntheticEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		if (points > 2) {
-			alert("You gotta spend more points, choom!");
+			setModalContents(<b>You gotta spend more points, choom!</b>);
+			setUseModal(true);
 			return;
 		}
+		//TODO: Might put together a confirmation dialogue for finalizing, or else have some other way to make finalizing feel better~!
 		increaseMoney(100 * points);
 		props.next();
 	};
 
 	return (
 		<section>
+			<CustomModal
+				active={useModal}
+				control={setUseModal}
+			>
+				{modalContents}
+			</CustomModal>
 			<h2> Hard Stats</h2>
 			<p>Available Primary Stat Points: {points}</p>
 			<SingleStat

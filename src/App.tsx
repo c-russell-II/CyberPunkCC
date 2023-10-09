@@ -10,12 +10,12 @@ import RoleQuestions from "./Pages/RoleQuestions";
 import GearStore from "./Pages/GearStore";
 import CyberwareStore from "./Pages/CyberwareStore";
 import CharaSheet from "./Pages/CharaSheet";
-
 function App() {
 	const [step, setStep] = useState("start");
 	const [body, setBody] = useState(<></>);
 	const role = useRoleStore((state) => state.role);
-	//TODO: Replace Alert with a Custom Modal! alert is actually *really* irritating and serves functionally zero purpose!
+	//TODO: add a version number!
+	//TODO: Fix tab icon!
 	useEffect(() => {
 		switch (step) {
 			case "start":

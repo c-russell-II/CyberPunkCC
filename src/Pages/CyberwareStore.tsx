@@ -8,26 +8,32 @@ import {
 } from "../Info/Cyberware";
 import Accordian from "../Components/Accordian";
 import SingleRequirementRender from "../Components/SingleRequirementRender";
+import { useState } from "react";
+import CustomModal from "../Components/CustomModal";
 
 export default function CyberwareStore(props: {next: () => void}) {
 	const chara = useCharaStore((state: CharaStore) => state);
 	const { neuro, phys, reflex } = useStatStore(
 		(state: StatStore) => state.stats
 	);
+	const [useModal, setUseModal] = useState(false);
+	const [modalContents, setModalContents] = useState(<></>)
 
 	const handlePurchase = (cyberware: Cyberware) => {
 		if (chara.money < cyberware.price || cyberware.capCost > chara.cyberwareCapacity) {
-			alert("You don't have enough money or Cyberware capacity!");
+			setModalContents(<b>Not enough money or cyberware capacity!</b>)
 			return;
 		} else {
 			chara.decreaseMoney(cyberware.price);
 			chara.installCyberware(cyberware);
-			alert("Cyberware Purchased!");
+			setModalContents(<b>{cyberware.name} purchased!</b>)
+			setUseModal(true);
 		}
 	};
 	return (
 		<section>
 			<h2>Purchase Miscellaneous Cyberware</h2>
+			<CustomModal active={useModal} control={setUseModal}>{modalContents}</CustomModal>
 			<p>
 				This is where you can buy from the current list of available cyberware.
 			</p>
