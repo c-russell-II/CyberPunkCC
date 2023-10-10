@@ -5,7 +5,7 @@ import {
 	ExampleCharacter,
 	SingleRole,
 } from "../Info/Roles/RoleTypes";
-import Accordian from "../Components/Accordian";
+import Accordian from "../Components/Accordian/Accordian";
 import { useRoleStore } from "../Utils/RoleStore";
 
 export default function PickRole(props: {next: () => void}) {

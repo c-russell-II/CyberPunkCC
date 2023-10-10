@@ -54,8 +54,8 @@ export default function Accordian(props: PropsWithChildren<AccordianProps>) {
 		}
 	};
 	return (
-		<div
-			onClick={(event: React.SyntheticEvent<HTMLDivElement>) => {
+		<article
+			onClick={(event: React.SyntheticEvent) => {
 				setIsActive((prev) => !prev);
 				event.stopPropagation();
 			}}
@@ -63,6 +63,6 @@ export default function Accordian(props: PropsWithChildren<AccordianProps>) {
 		>
 			{getTitle()}
 			{isActive && children}
-		</div>
+		</article>
 	);
 }

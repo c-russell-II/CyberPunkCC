@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Accordian from "../Components/Accordian";
+import Accordian from "../Components/Accordian/Accordian";
 import { requirementCheck } from "../Info/Cyberware";
 import { OSOptions } from "../Info/CyberwareInfo/OSCyberware";
 import useStatStore from "../Utils/StatStore";

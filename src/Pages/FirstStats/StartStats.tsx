@@ -1,8 +1,8 @@
 import { useState } from "react";
-import SingleStat from "../Components/NumberChooser";
-import useStatStore from "../Utils/StatStore";
-import { useCharaStore } from "../Utils/CharaStore";
-import CustomModal from "../Components/CustomModal";
+import SingleStat from "../../Components/NumberChooser";
+import useStatStore from "../../Utils/StatStore";
+import { useCharaStore } from "../../Utils/CharaStore";
+import CustomModal from "../../Components/CustomModal";
 
 export default function StartStats(props: { next: () => void }) {
 	const { stats, increase, decrease } = useStatStore();
@@ -14,7 +14,7 @@ export default function StartStats(props: { next: () => void }) {
 	const checkStatChange = (val: number, dir: boolean) => {
 		if (dir) {
 			if (val > points) {
-				setModalContents(<b>Not Enough Points Remaining!</b>)
+				setModalContents(<b>Not Enough Points Remaining!</b>);
 				setUseModal(true);
 				return false;
 			}

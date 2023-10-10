@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import StartStats from "./Pages/StartStats";
+import StartStats from "./Pages/FirstStats/StartStats";
 import PickOS from "./Pages/PickOS";
 import SecondaryStats from "./Pages/SecondaryStats";
 import PickRole from "./Pages/PickRole";
 import { useRoleStore } from "./Utils/RoleStore";
-import CharaDefiner from "./Pages/CharaDefiner";
+import CharaDefiner from "./Pages/Character Definer/CharaDefiner";
 import RoleQuestions from "./Pages/RoleQuestions";
 import GearStore from "./Pages/GearStore";
 import CyberwareStore from "./Pages/CyberwareStore";

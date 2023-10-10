@@ -6,7 +6,7 @@ import {
 	cyberwareBySlot,
 	requirementCheck,
 } from "../Info/Cyberware";
-import Accordian from "../Components/Accordian";
+import Accordian from "../Components/Accordian/Accordian";
 import SingleRequirementRender from "../Components/SingleRequirementRender";
 import { useState } from "react";
 import CustomModal from "../Components/CustomModal";

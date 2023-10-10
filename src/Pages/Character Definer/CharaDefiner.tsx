@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Accordian from "../Components/Accordian";
-import CompletableTextArea from "../Components/CompletableTextArea";
-import { useCharaStore } from "../Utils/CharaStore";
+import Accordian from "../../Components/Accordian/Accordian";
+import CompletableTextArea from "../../Components/CompletableTextArea";
+import { useCharaStore } from "../../Utils/CharaStore";
 
 export default function CharaDefiner(props: { next: () => void }) {
 	const [name, setName] = useState("");

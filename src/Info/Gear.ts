@@ -32,70 +32,71 @@ interface FirearmWithReqs extends BaseFirearm {
     requirements: StatReq[];
 }
 
-const pistols: {[key: string]: AnyFirearm} = {
-    lightPistol: {
-        id: 'pistol',
-        name: 'pistol',
-        price: 50,
-        description: "A small pistol that isn't difficult to conceal.",
-        type: 'firearm',
-        firearmType: 'pistol',
-        damage: 1,
-        range: 'short',
-        rof: 1,
-        hasRequirements: false
-    },
-    stealthPistol: {
-        id: 'stealthPistol',
-        name: 'stealth pistol',
-        firearmType: 'pistol',
-        price: 100,
-        description: "A small pistol with integrated suppressor, expressly designed for concealment.",
-        type: 'firearm',
-        damage: 1,
-        range: 'short',
-        rof: 1,
-        hasRequirements: false
-    },
-    revolver: {
-        id: 'revolver',
-        name: "revolver",
-        firearmType: 'pistol',
-        price: 90,
-        description: "An old, but functional six-shooter.",
-        type: 'firearm',
-        damage: 2,
-        range: 'medium',
-        rof: 1,
-        hasRequirements: true,
-        requirements: [{type: 'stat', stat: 'phys', value: 2}]
-    },
-    heavyPistol: {
-        id: 'heavyPistol',
-        name: 'heavy pistol',
-        firearmType: 'pistol',
-        price: 160,
-        description: 'A weighty, solid-steel built semiautomatic handgun.',
-        type: 'firearm',
-        damage: 3,
-        range: 'medium',
-        rof: 1,
-        hasRequirements: false
-    },
-    heavyRevolver: {
-        id: 'heavyRevolver',
-        name: 'heavy revolver',
-        firearmType: 'pistol',
-        price: 180,
-        description: "An outsized, centerfire revolver in a heavy caliber.",
-        type: 'firearm',
-        damage: 4,
-        range: 'medium',
-        rof: 1,
-        hasRequirements: true,
-        requirements: [{type: 'stat', stat: 'phys', value: 3}]
-    }
-}
+const pistols: { [key: string]: AnyFirearm } = {
+	lightPistol: {
+		id: "lightPistol",
+		name: "pistol",
+		price: 50,
+		description: "A small pistol that isn't difficult to conceal.",
+		type: "firearm",
+		firearmType: "pistol",
+		damage: 1,
+		range: "short",
+		rof: 1,
+		hasRequirements: false,
+	},
+	stealthPistol: {
+		id: "stealthPistol",
+		name: "stealth pistol",
+		firearmType: "pistol",
+		price: 100,
+		description:
+			"A small pistol with integrated suppressor, expressly designed for concealment.",
+		type: "firearm",
+		damage: 1,
+		range: "short",
+		rof: 1,
+		hasRequirements: false,
+	},
+	revolver: {
+		id: "revolver",
+		name: "revolver",
+		firearmType: "pistol",
+		price: 90,
+		description: "An old, but functional six-shooter.",
+		type: "firearm",
+		damage: 2,
+		range: "medium",
+		rof: 1,
+		hasRequirements: true,
+		requirements: [{ type: "stat", stat: "phys", value: 2 }],
+	},
+	heavyPistol: {
+		id: "heavyPistol",
+		name: "heavy pistol",
+		firearmType: "pistol",
+		price: 160,
+		description: "A weighty, solid-steel built semiautomatic handgun.",
+		type: "firearm",
+		damage: 3,
+		range: "medium",
+		rof: 1,
+		hasRequirements: false,
+	},
+	heavyRevolver: {
+		id: "heavyRevolver",
+		name: "heavy revolver",
+		firearmType: "pistol",
+		price: 180,
+		description: "An outsized, centerfire revolver in a heavy caliber.",
+		type: "firearm",
+		damage: 4,
+		range: "medium",
+		rof: 1,
+		hasRequirements: true,
+		requirements: [{ type: "stat", stat: "phys", value: 3 }],
+	},
+};
 
 const subMachineGuns: { [key: string]: AnyFirearm } = {
 	smg: {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Accordian from "../Components/Accordian";
+import Accordian from "../Components/Accordian/Accordian";
 import SingleRequirementRender from "../Components/SingleRequirementRender";
 import { AnyReq, StatReq } from "../Info/Cyberware";
 import { AnyFirearm, firearms } from "../Info/Gear";
@@ -8,7 +8,9 @@ import useStatStore from "../Utils/StatStore";
 import CustomModal from "../Components/CustomModal";
 
 export default function GearStore(props: { next: () => void }) {
-	const { money, decreaseMoney, addGear } = useCharaStore();
+	const money = useCharaStore((state) => state.money);
+	const decreaseMoney = useCharaStore((state) => state.decreaseMoney);
+	const addGear = useCharaStore((state) => state.addGear);
 	const { stats } = useStatStore();
 	const [useModal, setUseModal] = useState(false);
 	const [modalContents, setModalContents] = useState(<></>);
